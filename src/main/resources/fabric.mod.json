@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "random_island",
+  "version": "${version}",
+  "name": "随机空岛",
+  "description": "轻量经典空岛生存：可配置空岛 + 每60秒刷新随机奖励箱。仅主世界为空岛，下界与末地保持原版。",
+  "authors": [
+    "随机空岛开发组"
+  ],
+  "contact": {},
+  "entrypoints": {
+    "main": [
+      "com.randomisland.RandomIslandMod"
+    ],
+    "modmenu": [
+      "com.randomisland.config.ModMenuIntegration"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "1.20.1",
+    "fabric-api": "*",
+    "cloth-config": ">=11.0.0"
+  },
+  "suggests": {
+    "modmenu": ">=7.2.2"
+  },
+  "icon": "assets/random_island/icon.png",
+  "environment": "*",
+  "mixins": [
+    "random_island.mixins.json"
+  ]
+}

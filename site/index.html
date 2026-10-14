@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>随机空岛 · 轻量经典空岛生存 Mod</title>
+  <meta name="description" content="随机空岛（Random Island）— 面向 Minecraft 1.20.1 Fabric 的轻量经典空岛生存 Mod：可配置空岛 + 每 60 秒刷新随机奖励箱。" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">
+      <img src="favicon.svg" alt="logo" class="logo" />
+      <span>随机空岛</span>
+    </div>
+    <nav class="links">
+      <a href="#features">特性</a>
+      <a href="#install">安装</a>
+      <a href="#commands">指令</a>
+      <a href="#changelog">更新</a>
+      <a href="#QA">常见问题</a>
+      <a id="navDownload" class="btn small" href="#">下载</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="badge" id="ver">v1.0.0</span>
+        <h1>随机空岛 <span class="accent">Random Island</span></h1>
+        <p class="subtitle">轻量随机空岛生存。出生在虚空中的小岛，每 60 秒岛上的方块会<b>随机重组</b>，并刷新随机奖励箱；仅主世界为空岛，下界与末地保持原版。</p>
+        <div class="hero-actions">
+          <a id="dl" class="btn primary" href="#">⬇ 下载 Mod</a>
+          <span class="meta" id="mc">Minecraft 1.20.1 · Fabric</span>
+        </div>
+        <ul class="hero-meta">
+          <li>版本 <b id="ver2">1.0.0</b></li>
+          <li>大小 <b id="size">—</b></li>
+          <li>更新于 <b id="date">—</b></li>
+          <li>文件 <b id="file">random_island-1.0.0.jar</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <h2>核心特性</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="ico">🏝️</div>
+          <h3>随机空岛</h3>
+          <p>出生在虚空中的小岛；每 60 秒岛上的 3×3×3 方块会整体<b>随机重组</b>——这就是“随机空岛”。</p>
+        </article>
+        <article class="card">
+          <div class="ico">🎁</div>
+          <h3>随机奖励箱</h3>
+          <p>每 60 秒在玩家附近刷新一个随机奖励箱，让空岛不再枯燥。</p>
+        </article>
+        <article class="card">
+          <div class="ico">⚙️</div>
+          <h3>可配置</h3>
+          <p>通过 ModMenu / 配置文件调整空岛大小、奖励箱间隔等参数。</p>
+        </article>
+        <article class="card">
+          <div class="ico">🌍</div>
+          <h3>仅主世界</h3>
+          <p>空岛只作用于主世界；下界与末地保持原版，探索不打折。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="install" class="section">
+      <h2>安装步骤</h2>
+      <ol class="steps">
+        <li><b>安装前置</b>：先安装 <a href="https://fabricmc.net/use/installer/" target="_blank" rel="noopener">Fabric Loader</a> 与 <a href="https://modrinth.com/mod/fabric-api" target="_blank" rel="noopener">Fabric API</a>（建议搭配 ModMenu 查看配置）。</li>
+        <li><b>下载 Mod</b>：点击上方「下载 Mod」，得到 <code id="file2">random_island-1.0.0.jar</code>。</li>
+        <li><b>放入 mods</b>：把 jar 放进你的游戏实例 <code>mods/</code> 文件夹。</li>
+        <li><b>创建世界</b>：单人游戏 → 创建世界 → 「更多世界的选项」→ 世界类型选 <b>「随机空岛（虚空）」</b> → 创建。</li>
+      </ol>
+    </section>
+
+    <section id="changelog" class="section">
+      <h2>更新日志</h2>
+      <div class="changelog-box">
+        <p class="cl-date" id="clDate">—</p>
+        <p id="changelog">—</p>
+      </div>
+    </section>
+
+    <section id="commands" class="section">
+      <h2>指令教学</h2>
+      <p class="section-intro">所有指令均可由任意权限玩家使用（默认 0 级）。进入空岛世界后，在聊天框输入即可。下面列出全部指令与示例。</p>
+      <div class="cmd-grid">
+        <article class="cmd-card">
+          <code>/randomisland</code>
+          <p>查看当前状态报告（维度 / 是否空岛世界 / 空岛是否已生成 / 日志路径）。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland build</code>
+          <p>强制重建空岛与起步箱（忽略“已生成”标记），适合把已有世界改造成空岛。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland transform</code>
+          <p>立即把原点 3×3×3 的方块随机重组一次（按当前方块池）。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland interval &lt;秒&gt;</code>
+          <p>设置空岛方块变换间隔，例如 <code>/randomisland interval 30</code> 改为每 30 秒一变。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland refresh [force]</code>
+          <p>立即刷新一个随机奖励箱；加 <code>force</code> 忽略概率必出。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland skyblock</code>
+          <p>把你自己传送到空岛出生点（迷路时很有用）。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland allblocks [on|off]</code>
+          <p><b>全方块模式</b>：on 时随机池使用<b>全部已注册方块（含其它 mod）</b>，off 时用默认/自定义权重表。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland allitems [on|off]</code>
+          <p><b>全物品模式</b>：on 时随机箱掉落<b>全部已注册物品（含其它 mod）</b>，off 时用默认/自定义掉落池。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland uniform [on|off]</code>
+          <p><b>全方块统一</b>：on 时岛上每个位置都不同（全都不一样）；off 时整座岛都是<b>同一种</b>随机方块。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland weight</code>
+          <p>查看当前方块权重表。配合 <code>set &lt;方块&gt; &lt;权重&gt;</code> / <code>remove &lt;方块&gt;</code> / <code>reset</code> 增删与还原。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland reset</code>
+          <p>一键恢复全部默认设置（含空岛权重、掉落池、各开关）。</p>
+        </article>
+        <article class="cmd-card">
+          <code>/randomisland help</code>
+          <p>在游戏内打开这条指令与玩法帮助。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="QA" class="section">
+      <h2>常见问题 QA</h2>
+      <div class="faq">
+        <details open>
+          <summary>Q: 如何在单人游戏中创建随机空岛？</summary>
+          <p>A: 单人游戏 → 创建世界 → 「更多世界的选项」→ 世界类型选 <b>「随机空岛（虚空）」</b> → 创建。</p>
+        </details>
+        <details>
+          <summary>Q: 为什么在「世界类型」里找不到「随机空岛（虚空）」？</summary>
+          <p>A: 先在 ModMenu / 模组列表确认“随机空岛”已加载；预设要在创建世界的「更多世界的选项」里反复点「世界类型」循环切换才会出现在列表。若仍没有，查看游戏日志是否有注册报错。</p>
+        </details>
+        <details>
+          <summary>Q: 空岛方块为什么会一直变 / 每 60 秒重组？</summary>
+          <p>A: 这是本 mod 的核心玩法——原点 3×3×3 的方块每 60 秒按权重随机重组一次，无论原来有没有方块。如需稳定空岛，可在 ModMenu 关闭 <b>randomizeIsland</b>。</p>
+        </details>
+        <details>
+          <summary>Q: 怎么调整变换间隔，或让空岛立即变换？</summary>
+          <p>A: 指令 <code>/randomisland interval &lt;秒&gt;</code> 设置间隔；<code>/randomisland transform</code> 立即变换一次。两项也可在 ModMenu 中修改。</p>
+        </details>
+        <details>
+          <summary>Q: 怎么自定义随机方块的种类与概率（权重）？</summary>
+          <p>A: 用 <code>/randomisland weight set &lt;方块&gt; &lt;权重&gt;</code> 设置，<code>/randomisland weight</code> 查看，<code>/randomisland weight reset</code> 恢复默认；也可直接编辑配置 <code>config/random_island.json</code> 的 islandPalette。</p>
+        </details>
+        <details>
+          <summary>Q: 没有装 ModMenu 也能配置吗？</summary>
+          <p>A: 可以。配置写在游戏目录 <code>config/random_island.json</code>，手动编辑后重启游戏即生效。</p>
+        </details>
+        <details>
+          <summary>Q: 随机奖励箱不刷新 / 很少出现？</summary>
+          <p>A: 刷新受 <b>chestSpawnChance</b> 概率与 <b>refreshInterval</b> 间隔控制；用 <code>/randomisland refresh force</code> 强制刷一次排查。请确认你处于空岛（void）主世界。</p>
+        </details>
+        <details>
+          <summary>Q: 下界和末地也是空岛吗？</summary>
+          <p>A: 不是。空岛只作用于主世界；下界与末地保持原版地形。</p>
+        </details>
+        <details>
+          <summary>Q: 支持哪些 Minecraft 版本与加载器？</summary>
+          <p>A: 当前为 Minecraft <b>1.20.1</b> + Fabric Loader（需 Fabric API）。页面顶部显示当前支持版本。</p>
+        </details>
+        <details>
+          <summary>Q: 怎么一键恢复所有默认设置？</summary>
+          <p>A: <code>/randomisland reset</code> 恢复全部默认（含空岛权重与奖励池）；方块权重单独用 <code>/randomisland weight reset</code>。</p>
+        </details>
+        <details>
+          <summary>Q: 配置文件与运行日志在哪？</summary>
+          <p>A: 配置：<code>.minecraft/config/random_island.json</code>；运行日志：<code>.minecraft/config/random_island/mod_running_log.txt</code>。</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>随机空岛 · 基于 Fabric 的社区 Mod · 本网站每次更新自动同步最新版本。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

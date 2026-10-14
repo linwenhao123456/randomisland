@@ -1,0 +1,65 @@
+plugins {
+    id 'fabric-loom' version '1.7.4'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+// 注意：仓库统一在 settings.gradle 的 dependencyResolutionManagement 中声明。
+// 这里不要再声明 repositories，否则会覆盖 Loom 注册到 settings 的本地仓库
+// （LoomLocalRemappedMods / minecraftMaven），导致依赖解析失败。
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    modImplementation "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 17
+    it.options.encoding = 'UTF-8'
+    // 强制 fork 独立 javac 子进程，避免进程内编译器忽略 -encoding，导致 UTF-8 中文源码在 GBK 平台编译失败
+    it.options.fork = true
+    it.options.forkOptions.jvmArgs += ['-Dfile.encoding=UTF-8']
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// 构建完成后把最终 jar 复制到工程根目录，方便取用
+tasks.register('copyJar', Copy) {
+    from remapJar
+    into rootDir
+    // 目标目录就是项目根目录（含构建日志等变化中的文件），必须关闭状态跟踪，
+    // 否则 Gradle 无法为其计算 MD5 而报 "Cannot access a file in the destination directory"
+    doNotTrackState('复制产物到项目根目录，无需增量状态跟踪')
+}
+build.finalizedBy copyJar
+
+// 调试：列出所有已注册的仓库（含 Loom 重映射本地仓库）
+tasks.register('printRepos') {
+    doLast {
+        println "=== REGISTERED REPOSITORIES ==="
+        project.repositories.each { r -> println "${r.name} | ${r.class.name} | ${r.hasProperty('url') ? r.url : ''}" }
+    }
+}

@@ -1,0 +1,4 @@
+{
+  "enchantment.random_island.mining": "Mining",
+  "random_island.enchant.mining.desc": "Instantly breaks any block (ignoring hardness, even bedrock), pickaxes only."
+}

@@ -1,0 +1,11 @@
+.gradle/
+build/
+**/build/
+site/download/
+.cf.env
+.wrangler/
+*.log
+*.err
+*.zip
+random_island-*.jar
+mc百科/
